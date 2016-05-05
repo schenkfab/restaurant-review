@@ -1,1 +1,1 @@
-angular.module('myApp', ['focus-if']);
+angular.module('myApp', ['ui.bootstrap']);
