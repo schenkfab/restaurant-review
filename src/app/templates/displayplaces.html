@@ -1,4 +1,4 @@
-<div ng-show='showDetails' class="panel panel-default">
+<div ng-show='details && showDetails' class="panel panel-default">
 	<div class="panel-heading"><h2>{{details.name}}</h2>
 	<span>
 		{{details.formatted_address}}
@@ -7,9 +7,14 @@
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-3" ng-repeat='photo in details.photos | limitTo:4' >
+				<figure>
 				<a ng-href="{{photo.getUrl({'maxWidth': 3000, 'maxHeight': 3000})}}" target='_blank' class="thumbnail">
-					<img ng-src="{{photo.getUrl({'maxWidth': 5000, 'maxHeight': 5000})}}" alt="">
+					
+						<img ng-src="{{photo.getUrl({'maxWidth': 5000, 'maxHeight': 5000})}}" alt="{{details.name}}">
+						<figcaption>{{details.name}}</figcaption>
+					
 				</a>
+				</figure>
 			</div> 
 		</div>
 		<div class="row">
@@ -32,7 +37,10 @@
 				<b>Author:</b> {{review.author_name}}
 			</div>
 			<div class="col-md-4">
-				<b>Date:</b> {{review.time * 1000 | date:'medium'}}
+				<b>Date:</b> 
+				<time>
+					{{review.time * 1000 | date:'medium'}}
+				</time>
 			</div>
 			<div class="col-md-4 text-right">
 				<b>Rating:</b> {{review.rating}}
@@ -40,9 +48,11 @@
 		</div>
 		<div ng-repeat-end class="row">
 			<div class="col-md-12">
-				<div class="well">
-					{{review.text}}
-				</div>
+				<article>
+					<div class="well">
+						{{review.text}}
+					</div>
+				</article>
 			</div>
 			<hr>
 		</div>
@@ -72,7 +82,6 @@
 					  <input type="radio" ng-model='review.rating' name="inlineRadioOptions" id="inlineRadio3" value="5"> 5
 					</label>
 				</div>
-				
 				<div class="form-group">
 					<label for="review">Review</label>
 					<textarea name="review" ng-model='review.text' class="form-control" cols="40" rows="5"></textarea>

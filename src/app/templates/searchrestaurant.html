@@ -3,7 +3,7 @@
 	<div class="form-group">
 		<input type="text" id='searchBox' name='searchBox' class="form-control" placeholder="Place"
 			   ng-autocomplete ng-model="autocomplete" options="options" details="details"
-			   require>
+			   require autofocus>
 	</div>
-	<button class="btn btn-default" ng-click="search()">Search</button>
+	<button ng-show='enableSearchButton' class="btn btn-default" ng-click="search()">Search</button>
 </form>

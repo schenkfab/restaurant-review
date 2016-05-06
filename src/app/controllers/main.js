@@ -1,6 +1,7 @@
 angular.module('myApp').controller('mainCtrl', function($scope, $http) {
 
 	$scope.showDetails = false;
+	$scope.enableSearchButton = true;
 
 	$scope.options = {
 		types: '(cities)'
