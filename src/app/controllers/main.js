@@ -14,7 +14,6 @@ angular.module('myApp').controller('mainCtrl', function($scope) {
 
 		service = new google.maps.places.PlacesService(document.createElement('div'));
 		service.nearbySearch({location: loc, radius:4000, type: 'restaurant'}, function(a) {
-			console.log(a);
 			$scope.restaurants = a;
 			$scope.$apply();
 		});

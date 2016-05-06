@@ -131,7 +131,6 @@ angular.module( 'myApp')
 
 											if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
 												scope.$apply(function() {
-													console.log(detailsResult);
 													controller.$setViewValue(detailsResult.formatted_address);
 													element.val(detailsResult.formatted_address);
 
