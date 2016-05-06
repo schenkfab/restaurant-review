@@ -30,6 +30,7 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http) {
 
 		function callback(place, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
+				console.log(place);
 				$scope.details = place;
 				$scope.showDetails = true;
 				$scope.$apply();
@@ -38,6 +39,9 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http) {
 	};
 
 	$scope.submit = function() {
+		var d = new Date();
+		var n = d.getTime() / 1000;
+		$scope.review.time = n;
 		$scope.details.reviews.unshift($scope.review);
 		$scope.review = {};
 	};

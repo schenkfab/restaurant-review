@@ -1,5 +1,9 @@
 <div ng-show='showDetails' class="panel panel-default">
-	<div class="panel-heading"><h2>{{details.name}}</h2></div>
+	<div class="panel-heading"><h2>{{details.name}}</h2>
+	<span>
+		{{details.formatted_address}}
+	</span>
+	</div>
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-3" ng-repeat='photo in details.photos | limitTo:4' >
@@ -8,11 +12,29 @@
 				</a>
 			</div> 
 		</div>
-		<div class="row" ng-repeat-start='review in details.reviews | limitTo: 5'>
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Opening Hours</h3>
+			</div>
+		</div>
+		<div class="row" ng-repeat='day in details.opening_hours.weekday_text'>
+			<div class="col-md-12">
+				{{day}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Reviews</h3>
+			</div>
+		</div>
+		<div class="row" ng-repeat-start='review in details.reviews | limitTo: 15'>
 			<div class="col-md-4">
 				<b>Author:</b> {{review.author_name}}
 			</div>
-			<div class="col-md-4 col-md-offset-4 text-right">
+			<div class="col-md-4">
+				<b>Date:</b> {{review.time * 1000 | date:'medium'}}
+			</div>
+			<div class="col-md-4 text-right">
 				<b>Rating:</b> {{review.rating}}
 			</div>
 		</div>
