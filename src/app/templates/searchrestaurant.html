@@ -1,11 +1,9 @@
 <form name="searchForm">
-	<h3>Restaurant</h3>
+	<h1>Places</h1>
 	<div class="form-group">
-		<input type="text" id='search' class="form-control" placeholder="Restaurant"
-			   uib-typeahead="restaurant for restaurant in restaurants($viewValue)"
-			   ng-model='searchFields.restaurant'
-			   details='details'
-			   autocomplete='off'
+		<input type="text" id='searchBox' name='searchBox' class="form-control" placeholder="Place"
+			   ng-autocomplete ng-model="autocomplete" options="options" details="details"
 			   require>
 	</div>
+	<button class="btn btn-default" ng-click="search()">Search</button>
 </form>

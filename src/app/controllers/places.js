@@ -1,12 +1,13 @@
-angular.module('myApp').controller('mainCtrl', function($scope, $http) {
+angular.module('myApp').controller('placesCtrl', function($scope, $http) {
 
-	$scope.showDetails = false;
+	$scope.showDetails = true;
 
 	$scope.options = {
-		types: '(cities)'
+		types: 'establishment'
 	};
 
 	$scope.search = function () {
+
 		console.log($scope.details);
 
 		var loc = 
@@ -19,22 +20,6 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http) {
 			$scope.restaurants = a;
 			$scope.$apply();
 		});
-	};
-
-	$scope.setDetails = function (index) {
-		var request = {
-			placeId: $scope.restaurants[index].place_id
-		};
-		service = new google.maps.places.PlacesService(document.createElement('div'));
-		service.getDetails(request, callback);
-
-		function callback(place, status) {
-			if (status == google.maps.places.PlacesServiceStatus.OK) {
-				$scope.details = place;
-				$scope.showDetails = true;
-				$scope.$apply();
-			}
-		}
 	};
 
 	$scope.submit = function() {

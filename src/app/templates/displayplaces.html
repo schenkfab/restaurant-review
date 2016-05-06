@@ -1,0 +1,63 @@
+<div ng-show='showDetails' class="panel panel-default">
+	<div class="panel-heading"><h2>{{details.name}}</h2></div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-3" ng-repeat='photo in details.photos | limitTo:4' >
+				<a ng-href="{{photo.getUrl({'maxWidth': 3000, 'maxHeight': 3000})}}" target='_blank' class="thumbnail">
+					<img ng-src="{{photo.getUrl({'maxWidth': 5000, 'maxHeight': 5000})}}" alt="">
+				</a>
+			</div> 
+		</div>
+		<div class="row" ng-repeat-start='review in details.reviews | limitTo: 5'>
+			<div class="col-md-4">
+				<b>Author:</b> {{review.author_name}}
+			</div>
+			<div class="col-md-4 col-md-offset-4 text-right">
+				<b>Rating:</b> {{review.rating}}
+			</div>
+		</div>
+		<div ng-repeat-end class="row">
+			<div class="col-md-12">
+				<div class="well">
+					{{review.text}}
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div class="row">
+		<div class="col-md-12">
+			<form name="reviewForm">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="name" ng-model='review.author_name' class="form-control" name="name" id="name" placeholder="Name">
+				</div>
+				<div class="form-group">
+					<label for="inlineRadioOptions">Rating</label>
+					<br>
+				<label class="radio-inline">
+					 <input type="radio"  ng-model='review.rating' name="inlineRadioOptions" id="inlineRadio1" value="1"> 1
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" ng-model='review.rating' name="inlineRadioOptions" id="inlineRadio2" value="2"> 2
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" ng-model='review.rating' name="inlineRadioOptions" id="inlineRadio3" value="3"> 3
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" ng-model='review.rating' name="inlineRadioOptions" id="inlineRadio3" value="4"> 4
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" ng-model='review.rating' name="inlineRadioOptions" id="inlineRadio3" value="5"> 5
+					</label>
+				</div>
+				
+				<div class="form-group">
+					<label for="review">Review</label>
+					<textarea name="review" ng-model='review.text' class="form-control" cols="40" rows="5"></textarea>
+				</div>
+				<button type="submit" ng-click='submit()' class="btn btn-default">Submit</button>
+			</form>
+			</div>
+		</div>
+	</div>
+</div>

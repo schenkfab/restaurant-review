@@ -9,8 +9,8 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
 
-gulp.task('inject:dev', ['css:dev', 'fonts:dev', 'sass:dev', 'js:dev', 'directives:dev'], function () {
-	var target = gulp.src('./src/index.html');
+gulp.task('inject:dev', ['css:dev', 'assets:dev', 'fonts:dev', 'sass:dev', 'js:dev', 'directives:dev'], function () {
+	var target = gulp.src(['./src/index.html', './src/places.html']);
 	var sources = gulp.src(['./.tmp/**/*.js', './.tmp/**/style.css'], {read: false});
 	
 	var sourceVendorJs = gulp.src(['./bower_components/jquery/dist/jquery.js', './bower_components/angular/angular.js'
@@ -26,6 +26,11 @@ gulp.task('inject:dev', ['css:dev', 'fonts:dev', 'sass:dev', 'js:dev', 'directiv
 		.pipe(wiredep())
 		.pipe(gulp.dest('./.tmp'))
 		.pipe(browserSync.stream());
+});
+
+gulp.task('assets:dev', function () {
+	return gulp.src('./src/assets/**/*.*')
+		.pipe(gulp.dest('./.tmp/assets/'));
 });
 
 gulp.task('bootstrap-font:dev', function () {

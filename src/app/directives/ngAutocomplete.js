@@ -118,7 +118,6 @@ angular.module( 'myApp')
 							},
 							function listentoresult(list, status) {
 								if(list == null || list.length == 0) {
-
 									scope.$apply(function() {
 										scope.details = null;
 									});
@@ -126,12 +125,13 @@ angular.module( 'myApp')
 								} else {
 									var placesService = new google.maps.places.PlacesService(element[0]);
 									placesService.getDetails(
+									//placesService.nearbySearch(
 										{'reference': list[0].reference},
 										function detailsresult(detailsResult, placesServiceStatus) {
 
 											if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
 												scope.$apply(function() {
-
+													console.log(detailsResult);
 													controller.$setViewValue(detailsResult.formatted_address);
 													element.val(detailsResult.formatted_address);
 

@@ -11,7 +11,7 @@
 		<!-- inject:css -->
 		<!-- endinject -->
 	</head>
-	<body ng-app="myApp" ng-controller='mainCtrl'>
+	<body ng-app="myApp" ng-controller='placesCtrl'>
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
@@ -27,17 +27,17 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li class="active"><a href="#">Places by Location <span class="sr-only">(current)</span></a></li>
-		        <li><a href="places.html">Search for Places</a></li>
+		        <li><a href="index.html">Places by Location</a></li>
+		        <li class="active"><a href="places.html">Search for Places <span class="sr-only">(current)</span></a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
-
+		
 		<div class="container">
 			<searchrestaurant></searchrestaurant>
-			<listrestaurants></listrestaurants>
 			<displayplaces></displayplaces>
+			<listrestaurants></listrestaurants>
 			<img class="pull-right" src='/assets/images/powered_by_google_on_white.png'>
 		</div>
 
