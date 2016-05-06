@@ -1,4 +1,4 @@
-angular.module('myApp').controller('mainCtrl', function($scope, $http) {
+angular.module('myApp').controller('mainCtrl', function($scope) {
 
 	$scope.showDetails = false;
 	$scope.enableSearchButton = true;
@@ -8,14 +8,12 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http) {
 	};
 
 	$scope.search = function () {
-		console.log($scope.details);
-
 		var loc = 
 			new google.maps.LatLng(	$scope.details.geometry.location.lat(),
 									$scope.details.geometry.location.lng());
 
 		service = new google.maps.places.PlacesService(document.createElement('div'));
-		service.nearbySearch({location: loc, radius:4000, type: 'restaurant'}, a => {
+		service.nearbySearch({location: loc, radius:4000, type: 'restaurant'}, function(a) {
 			console.log(a);
 			$scope.restaurants = a;
 			$scope.$apply();
@@ -31,7 +29,6 @@ angular.module('myApp').controller('mainCtrl', function($scope, $http) {
 
 		function callback(place, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
-				console.log(place);
 				$scope.details = place;
 				$scope.showDetails = true;
 				$scope.$apply();

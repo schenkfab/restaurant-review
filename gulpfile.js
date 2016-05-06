@@ -8,6 +8,7 @@ var runSequence = require('run-sequence');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
+var babel = require('gulp-babel');
 
 gulp.task('inject:dev', ['css:dev', 'assets:dev', 'fonts:dev', 'sass:dev', 'js:dev', 'directives:dev'], function () {
 	var target = gulp.src(['./src/index.html', './src/places.html']);
@@ -81,9 +82,9 @@ gulp.task('serve:dev', ['inject:dev'], function() {
 
 <!-- PRODUCTION -->
 
-gulp.task('inject:prod', ['css:prod', 'fonts:prod', 'sass:prod', 'vendorJs:prod', 'js:prod', 'directives:prod'], function () {
-	var target = gulp.src('./src/index.html');
-	var sourceVendorJs = gulp.src(['./dist/**/vendor.js'], {read: false});
+gulp.task('inject:prod', ['css:prod', 'fonts:prod', 'assets:prod', 'sass:prod', 'vendorJs:prod', 'js:prod', 'directives:prod'], function () {
+	var target = gulp.src(['./src/index.html', './src/places.html']);
+	var sourceVendorJs = gulp.src(['./dist/**/jquery.js', './dist/**/angular.js', './dist/**/angular-ui.js', './dist/**/focusIf.js', './dist/**/ui-bootstrap-tpls.js', './dist/sw.js'], {read: false});
 	var sourcesAllJs = gulp.src(['./dist/**/all.js'], {read: false});
 	var vendorSources = gulp.src(['./dist/**/vendors.css', './dist/css/*.*'], {read: false});
 
@@ -103,6 +104,11 @@ gulp.task('clean:prod', function () {
 gulp.task('bootstrap-font:prod', function() {
 	return gulp.src('./bower_components/bootstrap/fonts/*.*')
 		.pipe(gulp.dest('./dist/fonts/bootstrap'));
+});
+
+gulp.task('assets:prod', function () {
+	return gulp.src('./src/assets/**/*.*')
+		.pipe(gulp.dest('./dist/assets/'));
 });
 
 gulp.task('fonts:prod', ['bootstrap-font:prod'], function () {
@@ -126,17 +132,18 @@ gulp.task('sass:prod', function() {
 		.pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('js:prod', function() {
+gulp.task('js:prod', [], function() {
 	return gulp.src('./src/app/**/*.js')
+		//.pipe(babel({presets: ['es2015']}))
 		.pipe(uglify({mangle: false}).on('error', gutil.log))
 		.pipe(concat('all.js'))
-		
 		.pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('vendorJs:prod', function() {
-	return gulp.src(['./bower_components/angular/angular.js', './bower_components/bootstrap/dist/js/bootstrap.js', './bower_components/ng-focus-if/focusIf.js'])
-		.pipe(concat('vendor.js'))
+	return gulp.src(['./bower_components/jquery/dist/jquery.js', './bower_components/angular/angular.js'
+	, './bower_components/ng-focus-if/focusIf.js', './bower_components/angular-ui/build/angular-ui.js'
+	, './bower_components/angular-bootstrap/ui-bootstrap-tpls.js'])
 		.pipe(uglify({mangle: false}))
 		.pipe(gulp.dest('./dist/js'));
 });
