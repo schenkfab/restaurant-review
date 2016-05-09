@@ -1,42 +1,44 @@
 <div ng-show="restaurants">
 <hr>
 <h3 class="page-header">Restaurants</h3>
+<p>Type: {{type}}</p>
+<p>Currently Open: {{open}}</p>
 <div class="row">
 	<div class="col-xs-2">
-		<p class="btn" ng-click="search();">All</p>
+		<button class="btn btn-link" ng-click="search(); type = 'All'">All</button>
 	</div>
 	<div class="col-xs-2">
-		<p class="btn" ng-click="search('italian');">Italian</p>
+		<button class="btn btn-link" ng-click="search('italian'); type = 'Italian'">Italian</button>
 	</div>
 	<div class="col-xs-2">
-		<p class="btn" ng-click="search('sushi');">Sushi</p>
+		<button class="btn btn-link" ng-click="search('sushi'); type = 'Sushi'">Sushi</button>
 	</div>
 	<div class="col-xs-2">
-		<p class="btn" ng-click="search('steak');">Steak</p>
+		<button class="btn btn-link" ng-click="search('steak'); type = 'Steak'">Steak</button>
 	</div>
 	<div class="col-xs-2">
-		<p class="btn" ng-click="search('burger');">Burger</p>
+		<button class="btn btn-link" ng-click="search('burger'); type = 'Burger'">Burger</button>
 	</div>
 	<div class="col-xs-2">
-		<p class="btn" ng-click="search('greek');">Greek</p>
+		<button class="btn btn-link" ng-click="search('greek'); type = 'Greek'">Greek</button>
 	</div>
 </div>
 <hr>
 <div class="row">
 	<div class="col-xs-2">
-		<p class="btn" ng-click="isOpen = undefined;">All</p>
+		<button class="btn btn-link" ng-click="isOpen = undefined;open = 'All'">All</button>
 	</div>
-	<div class="col-xs-2">
-		<p class="btn" ng-click="isOpen = true;">Currently open</p>
+	<div class="col-xs-4">
+		<button class="btn btn-link" ng-click="isOpen = true; open = 'Yes'">Currently open</button>
 	</div>
-	<div class="col-xs-2">
-		<p class="btn" ng-click="isOpen = false;">Currently closed</p>
+	<div class="col-xs-4">
+		<button class="btn btn-link" ng-click="isOpen = false; open = 'No'">Currently closed</button>
 	</div>
 </div>
 <hr>
 <div class="row">
 	<div  ng-repeat='restaurant in restaurants | filter:{opening_hours: {open_now: isOpen}}' class="col-md-4">
-		<p class='btn btn-default btn-margin' ng-click='setDetails(restaurant)'>{{restaurant.name}}</p>
+		<button class='btn btn-default btn-margin' ng-click='setDetails(restaurant)'>{{restaurant.name}}</button>
 	</div>
 </div>
 </div>

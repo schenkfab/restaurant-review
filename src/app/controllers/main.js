@@ -15,7 +15,6 @@ angular.module('myApp').controller('mainCtrl', function($scope) {
 		service = new google.maps.places.PlacesService(document.createElement('div'));
 		service.nearbySearch({location: loc, radius:50000, keyword: keyword, type: 'restaurant'}, function(a) {
 			$scope.restaurants = a;
-			console.log(a);
 			$scope.$apply();
 		});
 	};
@@ -30,7 +29,6 @@ angular.module('myApp').controller('mainCtrl', function($scope) {
 		function callback(place, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
 				$scope.details = place;
-				console.log(place);
 				$scope.showDetails = true;
 				$scope.$apply();
 			}
