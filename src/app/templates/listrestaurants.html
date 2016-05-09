@@ -1,7 +1,44 @@
+<div ng-show="restaurants">
+<hr>
+<h3 class="page-header">Restaurants</h3>
 <div class="row">
-	<div  ng-repeat='restaurant in restaurants' class="col-md-4">
-		<p class='btn btn-success btn-margin' ng-click='setDetails($index)'>{{restaurant.name}}</p>
+	<div class="col-xs-2">
+		<p class="btn" ng-click="search();">All</p>
 	</div>
+	<div class="col-xs-2">
+		<p class="btn" ng-click="search('italian');">Italian</p>
+	</div>
+	<div class="col-xs-2">
+		<p class="btn" ng-click="search('sushi');">Sushi</p>
+	</div>
+	<div class="col-xs-2">
+		<p class="btn" ng-click="search('steak');">Steak</p>
+	</div>
+	<div class="col-xs-2">
+		<p class="btn" ng-click="search('burger');">Burger</p>
+	</div>
+	<div class="col-xs-2">
+		<p class="btn" ng-click="search('greek');">Greek</p>
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div class="col-xs-2">
+		<p class="btn" ng-click="isOpen = undefined;">All</p>
+	</div>
+	<div class="col-xs-2">
+		<p class="btn" ng-click="isOpen = true;">Currently open</p>
+	</div>
+	<div class="col-xs-2">
+		<p class="btn" ng-click="isOpen = false;">Currently closed</p>
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div  ng-repeat='restaurant in restaurants | filter:{opening_hours: {open_now: isOpen}}' class="col-md-4">
+		<p class='btn btn-default btn-margin' ng-click='setDetails(restaurant)'>{{restaurant.name}}</p>
+	</div>
+</div>
 </div>
 
 

@@ -7,21 +7,22 @@ angular.module('myApp').controller('mainCtrl', function($scope) {
 		types: '(cities)'
 	};
 
-	$scope.search = function () {
+	$scope.search = function (keyword) {
 		var loc = 
 			new google.maps.LatLng(	$scope.details.geometry.location.lat(),
 									$scope.details.geometry.location.lng());
 
 		service = new google.maps.places.PlacesService(document.createElement('div'));
-		service.nearbySearch({location: loc, radius:4000, type: 'restaurant'}, function(a) {
+		service.nearbySearch({location: loc, radius:50000, keyword: keyword, type: 'restaurant'}, function(a) {
 			$scope.restaurants = a;
+			console.log(a);
 			$scope.$apply();
 		});
 	};
 
-	$scope.setDetails = function (index) {
+	$scope.setDetails = function (restaurant) {
 		var request = {
-			placeId: $scope.restaurants[index].place_id
+			placeId: restaurant.place_id
 		};
 		service = new google.maps.places.PlacesService(document.createElement('div'));
 		service.getDetails(request, callback);
@@ -29,6 +30,7 @@ angular.module('myApp').controller('mainCtrl', function($scope) {
 		function callback(place, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
 				$scope.details = place;
+				console.log(place);
 				$scope.showDetails = true;
 				$scope.$apply();
 			}
